@@ -16,3 +16,4 @@ package/input/lib/net40/*
 package/output
 # push.cmd contains my secret nuget access key!
 package/push.cmd
+/src/packages
