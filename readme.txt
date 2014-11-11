@@ -1,5 +1,5 @@
 ErrorHandlerMvc
-by Daniel Calkins http://dcalkins.com - dcalkins@outlook.com
+by Daniel Calkins http://dcalkins.com - dan@dcalkins.com
 
 Forked from NotFoundMvc
 by Andrew Davey - http://aboutcode.net/ - andrew@equin.co.uk
