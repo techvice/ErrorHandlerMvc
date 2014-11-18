@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+    <metadata>
+        <id>ErrorHandlerMvc</id>
+        <version>1.1.0</version>
+        <title>Error Handler MVC</title>
+        <authors>Daniel Calkins</authors>
+        <owners>Daniel Calkins</owners>
+        <description>Provides a user-friendly error page whenever a controller, action or route is not found or encounters an error in your ASP.NET MVC5 application.
+Custom views are rendered instead of the default ASP.NET error page.</description>
+        <projectUrl>https://github.com/techvice/ErrorHandlerMvc</projectUrl>
+        <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <tags>asp.net mvc 404 notfound error handler handling</tags>
+        <language>en-US</language>
+    </metadata>
+</package>

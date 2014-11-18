@@ -11,8 +11,13 @@ namespace ErrorHandlerMvc
             var exception = requestContext.RouteData.DataTokens[Constants.Exception] as Exception;
             var controllerName = requestContext.RouteData.DataTokens[Constants.Controller] as string;
             var actionName = requestContext.RouteData.DataTokens[Constants.Action] as string;
+			
+			Controller controller = new FakeController();
+			ControllerContext context = new ControllerContext(requestContext, controller);
+			controller.ControllerContext = context;
+			
             var viewResult = new InternalErrorViewResult(exception, controllerName, actionName);
-            viewResult.ExecuteResult(new ControllerContext(requestContext, new FakeController()));
+            viewResult.ExecuteResult(context);
         }
 
         private class FakeController : Controller

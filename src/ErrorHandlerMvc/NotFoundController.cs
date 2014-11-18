@@ -12,9 +12,10 @@ namespace ErrorHandlerMvc
 
         public void ExecuteNotFound(RequestContext requestContext)
         {
-            new NotFoundViewResult().ExecuteResult(
-                new ControllerContext(requestContext, new FakeController())
-                );
+			Controller controller = new FakeController();
+			ControllerContext context = new ControllerContext(requestContext, controller);
+			controller.ControllerContext = context;
+            new NotFoundViewResult().ExecuteResult(context);
         }
 
         public ActionResult NotFound()

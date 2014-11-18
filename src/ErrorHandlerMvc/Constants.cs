@@ -6,6 +6,5 @@ namespace ErrorHandlerMvc
         public const string Controller = "Controller",
             Exception = "Exception",
             Action = "Action";
-
     }
 }
