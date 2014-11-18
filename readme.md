@@ -15,7 +15,7 @@ All you need to do is add the nuget package to your project and you will be set.
 Add via nuget using:
 Install-Package ErrorHandlerMvc
 
-[![Download on NuGet](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/release-notes/install-ormlite.png)](https://www.nuget.org/packages/ErrorHandlerMvc/)
+[Nuget page](https://www.nuget.org/packages/ErrorHandlerMvc/)
 
 Details
 -------
