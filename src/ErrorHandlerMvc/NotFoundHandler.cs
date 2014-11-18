@@ -7,32 +7,16 @@ namespace ErrorHandlerMvc
 {
     public class NotFoundHandler : IHttpHandler
     {
-        private static Func<RequestContext, IController> _createNotFoundController = context => (IController)new NotFoundController();
+        private static Func<RequestContext, INotFoundController> _createNotFoundController = context => new NotFoundController();
 
-        public static Func<RequestContext, IController> CreateNotFoundController
+        public static Func<RequestContext, INotFoundController> CreateNotFoundController
         {
-            get
-            {
-                return _createNotFoundController;
-            }
+            get { return _createNotFoundController; }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException();
+                if (value == null) throw new ArgumentNullException();
                 _createNotFoundController = value;
             }
-        }
-
-        public bool IsReusable
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        static NotFoundHandler()
-        {
         }
 
         public void ProcessRequest(HttpContext context)
@@ -42,24 +26,25 @@ namespace ErrorHandlerMvc
 
         private void ProcessRequest(HttpContextBase context)
         {
-            RequestContext requestContext = CreateRequestContext(context);
-            _createNotFoundController(requestContext).Execute(requestContext);
+            var requestContext = CreateRequestContext(context);
+            var controller = _createNotFoundController(requestContext);
+            controller.Execute(requestContext);
         }
 
         private RequestContext CreateRequestContext(HttpContextBase context)
         {
-            return new RequestContext(context, new RouteData
-            {
-                Values =
-                {
-                    {
-                        "controller",
-                        (object) "NotFound"
-                    }
-                }
-            });
+            var routeData = new RouteData();
+            routeData.Values.Add("controller", "NotFound");
+            var requestContext = new RequestContext(context, routeData);
+            return requestContext;
         }
 
+        public bool IsReusable
+        {
+            get { return false; }
+        }
+
+        // ControllerContext requires an object that derives from ControllerBase.
         private class FakeController : Controller
         {
         }

@@ -48,7 +48,7 @@ namespace ErrorHandlerMvc
             var controller = iController as Controller;
             if (controller == null)
                 return;
-            controller.ActionInvoker = new ActionInvokerWrapper(controller.ActionInvoker);
+            controller.ActionInvoker = ActionInvokerSelector.Current(controller.ActionInvoker);
         }
 
         public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)

@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionInvokerSelector.cs" />
     <Compile Include="ActionInvokerWrapper.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ControllerFactoryWrapper.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="InternalErrorController.cs" />
     <Compile Include="InternalErrorHandler.cs" />
     <Compile Include="InternalErrorViewResult.cs" />
+    <Compile Include="NotFoundAsyncControllerActionInvoker.cs" />
     <Compile Include="NotFoundController.cs" />
     <Compile Include="NotFoundHandler.cs" />
     <Compile Include="NotFoundViewResult.cs" />
