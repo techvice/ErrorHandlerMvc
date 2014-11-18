@@ -3,16 +3,35 @@ using System.Web.Routing;
 
 namespace ErrorHandlerMvc
 {
-    public class NotFoundController : IController
+    public class NotFoundController : IController, INotFoundController
     {
         public void Execute(RequestContext requestContext)
         {
-            var viewResult = new NotFoundViewResult();
-            viewResult.ExecuteResult(new ControllerContext(requestContext, new FakeController()));
+            ExecuteNotFound(requestContext);
         }
 
+        public void ExecuteNotFound(RequestContext requestContext)
+        {
+            new NotFoundViewResult().ExecuteResult(
+                new ControllerContext(requestContext, new FakeController())
+                );
+        }
+
+        public ActionResult NotFound()
+        {
+            return new NotFoundViewResult();
+        }
+
+        // ControllerContext requires an object that derives from ControllerBase.
+        // NotFoundController does not do this.
+        // So the easiest workaround is this FakeController.
         private class FakeController : Controller
         {
         }
+    }
+
+    public interface INotFoundController : IController
+    {
+        ActionResult NotFound();
     }
 }
