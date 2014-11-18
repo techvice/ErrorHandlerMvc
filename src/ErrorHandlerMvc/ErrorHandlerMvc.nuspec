@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>ErrorHandlerMvc</id>
-        <version>1.1.0</version>
+        <version>$version$</version>
         <title>Error Handler MVC</title>
         <authors>Daniel Calkins</authors>
         <owners>Daniel Calkins</owners>
@@ -14,4 +14,7 @@ Custom views are rendered instead of the default ASP.NET error page.</descriptio
         <tags>asp.net mvc 404 notfound error handler handling</tags>
         <language>en-US</language>
     </metadata>
+	<files>
+		<file src="..\..\package\content\**\*.*" target="content" />
+	</files>
 </package>
