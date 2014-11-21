@@ -29,12 +29,12 @@ namespace ErrorHandlerMvc
         {
             HttpResponseBase response = context.HttpContext.Response;
             HttpRequestBase request = context.HttpContext.Request;
-            ViewData["RequestedUrl"] = GetRequestedUrl(request);
-            ViewData["ReferrerUrl"] = GetReferrerUrl(request, request.Url.OriginalString);
             
-            response.StatusCode = 404;
             // Prevent IIS7 from overwriting our error page!
             response.TrySkipIisCustomErrors = true;
+            response.StatusCode = 404;
+            ViewData["RequestedUrl"] = GetRequestedUrl(request);
+            ViewData["ReferrerUrl"] = GetReferrerUrl(request, request.Url.OriginalString);
             var viewResult1 = new ViewResult {ViewName = ViewName, ViewData = ViewData};
             ViewResult viewResult2 = viewResult1;
             response.Clear();

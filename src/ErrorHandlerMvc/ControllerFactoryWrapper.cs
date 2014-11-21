@@ -43,7 +43,7 @@ namespace ErrorHandlerMvc
             return InternalErrorHandler.CreateInternalErrorController(requestContext);
         }
 
-        private void WrapControllerActionInvoker(IController iController)
+        private static void WrapControllerActionInvoker(IController iController)
         {
             var controller = iController as Controller;
             if (controller == null)

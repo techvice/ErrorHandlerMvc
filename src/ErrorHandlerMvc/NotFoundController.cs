@@ -3,7 +3,7 @@ using System.Web.Routing;
 
 namespace ErrorHandlerMvc
 {
-    public class NotFoundController : IController, INotFoundController
+    public class NotFoundController : INotFoundController
     {
         public void Execute(RequestContext requestContext)
         {
@@ -13,7 +13,7 @@ namespace ErrorHandlerMvc
         public void ExecuteNotFound(RequestContext requestContext)
         {
 			Controller controller = new FakeController();
-			ControllerContext context = new ControllerContext(requestContext, controller);
+			var context = new ControllerContext(requestContext, controller);
 			controller.ControllerContext = context;
             new NotFoundViewResult().ExecuteResult(context);
         }

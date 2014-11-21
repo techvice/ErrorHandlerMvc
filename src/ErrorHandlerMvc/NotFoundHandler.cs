@@ -5,9 +5,11 @@ using System.Web.Routing;
 
 namespace ErrorHandlerMvc
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class NotFoundHandler : IHttpHandler
     {
-        private static Func<RequestContext, INotFoundController> _createNotFoundController = context => new NotFoundController();
+        private static Func<RequestContext, INotFoundController> _createNotFoundController =
+            context => new NotFoundController();
 
         public static Func<RequestContext, INotFoundController> CreateNotFoundController
         {

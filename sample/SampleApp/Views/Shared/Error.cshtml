@@ -1,15 +1,31 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "Internal Server error";
+    @model HandleErrorInfo
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Error</title>
-</head>
-<body>
-    <h2>
-        Sorry, an error occurred while processing your request.
-    </h2>
-</body>
-</html>
+<h1>An Error Occurred</h1>
+<p>An internal server error was encountered at: @ViewBag.RequestedUrl</p>
+@if (ViewBag.ReferrerUrl != null)
+{
+    <p>Go back to the <a href="@ViewBag.ReferrerUrl">previous page</a>.</p>
+}
+
+<h3>Error Details</h3>
+<p>Controller: @Model.ControllerName</p>
+<p>Action: @Model.ActionName</p>
+
+@* This section shows the stack trace in an easier to read format. *@
+@if (Model.Exception.StackTrace != null)
+{
+    <p>Stack Trace: </p>
+    foreach (string s in Model.Exception.StackTrace.Split(new[] { " at" },
+        StringSplitOptions.RemoveEmptyEntries).Where(s => !string.IsNullOrWhiteSpace(s)))
+    {
+        <code>at @s</code>
+        <br />
+    }
+}
+
+@* Error page must be longer than 512 bytes for IE and Chrome to show it.
+    So add padding in case we're short. *@
+@(new string(' ', 512))

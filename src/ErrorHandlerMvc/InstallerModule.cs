@@ -22,46 +22,54 @@ namespace ErrorHandlerMvc
             }
         }
 
-        private void Install()
+        private static void Install()
         {
             WrapControllerBuilder();
             RouteCollection routes = RouteTable.Routes;
             using (routes.GetWriteLock())
             {
                 AddNotFoundRoute(routes);
+                AddErrorRoute(routes);
                 AddCatchAllRoute(routes);
             }
         }
 
-        private void WrapControllerBuilder()
+        private static void WrapControllerBuilder()
         {
-            ControllerBuilder.Current.SetControllerFactory(new ControllerFactoryWrapper(ControllerBuilder.Current.GetControllerFactory()));
+            ControllerBuilder.Current.SetControllerFactory(
+                new ControllerFactoryWrapper(ControllerBuilder.Current.GetControllerFactory()));
         }
 
-        private void AddNotFoundRoute(RouteCollection routes)
+        private static void AddErrorRoute(RouteCollection routes)
         {
             // To allow IIS to execute "/notfound" when requesting something which is disallowed,
             // such as /bin or /add_data.
-            var route = new Route("notfound", new RouteValueDictionary(new
-            {
-                controller = "NotFound",
-                action = "NotFound"
-            }), new RouteValueDictionary(new
-            {
-                incoming = new IncomingRequestRouteConstraint()
-            }), new MvcRouteHandler());
-			
-            // Insert at start of route table. This means the application can still create another route like "{name}" that won't capture "/notfound".
+            var route = new Route("error",
+                new RouteValueDictionary(new {controller = "InternalError", action = "Error",}),
+                new RouteValueDictionary(new {incoming = new IncomingRequestRouteConstraint()}),
+                new RouteValueDictionary(new {statusCode = 500}), new MvcRouteHandler());
+
+            // Insert at start of route table. 
+            //This means the application can still create another route like "{name}" that won't capture "/notfound".
             routes.Insert(0, route);
         }
 
-        private void AddCatchAllRoute(RouteCollection routes)
+        private static void AddNotFoundRoute(RouteCollection routes)
         {
-            routes.MapRoute("NotFound-Catch-All", "{*any}", new
-            {
-                controller = "NotFound",
-                action = "NotFound"
-            });
+            // To allow IIS to execute "/notfound" when requesting something which is disallowed,
+            // such as /bin or /add_data.
+            var route = new Route("notfound",
+                new RouteValueDictionary(new {controller = "NotFound", action = "NotFound"}),
+                new RouteValueDictionary(new {incoming = new IncomingRequestRouteConstraint()}), new MvcRouteHandler());
+			
+            // Insert at start of route table. 
+            //This means the application can still create another route like "{name}" that won't capture "/notfound".
+            routes.Insert(0, route);
+        }
+
+        private static void AddCatchAllRoute(RouteCollection routes)
+        {
+            routes.MapRoute("NotFound-Catch-All", "{*any}", new {controller = "NotFound", action = "NotFound"});
         }
 
         public void Dispose()

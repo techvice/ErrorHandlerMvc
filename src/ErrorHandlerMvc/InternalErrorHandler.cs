@@ -5,16 +5,15 @@ using System.Web.Routing;
 
 namespace ErrorHandlerMvc
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class InternalErrorHandler : IHttpHandler
     {
-        private static Func<RequestContext, IController> _createInternalErrorController = context => (IController)new InternalErrorController();
+        private static Func<RequestContext, IInternalErrorController> _createInternalErrorController =
+            context => (IInternalErrorController) new InternalErrorController();
 
-        public static Func<RequestContext, IController> CreateInternalErrorController
+        public static Func<RequestContext, IInternalErrorController> CreateInternalErrorController
         {
-            get
-            {
-                return _createInternalErrorController;
-            }
+            get { return _createInternalErrorController; }
             set
             {
                 if (value == null)
@@ -25,10 +24,7 @@ namespace ErrorHandlerMvc
 
         public bool IsReusable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public void ProcessRequest(HttpContext context)
@@ -42,18 +38,9 @@ namespace ErrorHandlerMvc
             _createInternalErrorController(requestContext).Execute(requestContext);
         }
 
-        private RequestContext CreateRequestContext(HttpContextBase context)
+        private static RequestContext CreateRequestContext(HttpContextBase context)
         {
-            return new RequestContext(context, new RouteData
-            {
-                Values =
-                {
-                    {
-                        "controller",
-                        (object) "Error"
-                    }
-                }
-            });
+            return new RequestContext(context, new RouteData {Values = {{"controller", (object) "Error"}}});
         }
 
         private class FakeController : Controller

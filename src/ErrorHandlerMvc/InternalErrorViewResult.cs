@@ -7,30 +7,34 @@ namespace ErrorHandlerMvc
 {
     public class InternalErrorViewResult : HttpStatusCodeResult
     {
-        public string ViewName { get; set; }
+        private string ViewName { get; set; }
 
-        public ViewDataDictionary ViewData { get; set; }
+        private ViewDataDictionary ViewData { get; set; }
 
-        public InternalErrorViewResult(Exception ex, string controllerName, string actionName)
+        public InternalErrorViewResult()
             : base(HttpStatusCode.InternalServerError)
         {
             ViewName = "Error";
-            ViewData = new ViewDataDictionary
-            {
-                Model =
-                    new HandleErrorInfo(ex, string.IsNullOrEmpty(controllerName) ? "Unknown" : controllerName,
-                        string.IsNullOrEmpty(actionName) ? "Unknown" : actionName)
-            };
+            ViewData = new ViewDataDictionary();
+        }
+
+        public InternalErrorViewResult(Exception ex, string controllerName, string actionName)
+            : this()
+        {
+            if (ex == null)
+                ex = new HttpException("An error has occurred.");
+            ViewData.Model = new HandleErrorInfo(ex, string.IsNullOrEmpty(controllerName) ? "Unknown" : controllerName,
+                string.IsNullOrEmpty(actionName) ? "Unknown" : actionName);
         }
 
         public override void ExecuteResult(ControllerContext context)
         {
             HttpResponseBase response = context.HttpContext.Response;
             HttpRequestBase request = context.HttpContext.Request;
+            response.TrySkipIisCustomErrors = true;
             ViewData["RequestedUrl"] = GetRequestedUrl(request);
             ViewData["ReferrerUrl"] = GetReferrerUrl(request, request.Url.OriginalString);
-            response.TrySkipIisCustomErrors = true;
-            var viewResult1 = new ViewResult { ViewName = ViewName, ViewData = ViewData };
+            var viewResult1 = new ViewResult {ViewName = ViewName, ViewData = ViewData};
             ViewResult viewResult2 = viewResult1;
             response.Clear();
             viewResult2.ExecuteResult(context);

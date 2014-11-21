@@ -8,15 +8,15 @@ namespace ErrorHandlerMvc
         static ActionInvokerSelector()
         {
             var mvcVersion = typeof (Controller).Assembly.GetName().Version.Major;
-            Current = mvcVersion <= 3 ? _mvc3Invoker : _mvc4Invoker;
+            Current = mvcVersion <= 3 ? Mvc3Invoker : Mvc4Invoker;
         }
 
-        private static readonly Func<IActionInvoker, IActionInvoker> _mvc3Invoker =
+        private static readonly Func<IActionInvoker, IActionInvoker> Mvc3Invoker =
             originalActionInvoker => new ActionInvokerWrapper(originalActionInvoker);
 
-        private static readonly Func<IActionInvoker, IActionInvoker> _mvc4Invoker =
-            originalActionInvoker => new NotFoundAsyncControllerActionInvoker();
+        private static readonly Func<IActionInvoker, IActionInvoker> Mvc4Invoker =
+            originalActionInvoker => new ErrorHandlingAsyncControllerActionInvoker();
 
-        public static Func<IActionInvoker, IActionInvoker> Current { get; set; }
+        public static Func<IActionInvoker, IActionInvoker> Current { get; private set; }
     }
 }

@@ -1,6 +1,7 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
-using NotFoundMvc;
+using ErrorHandlerMvc;
 
 namespace SampleApp.Controllers
 {
@@ -11,16 +12,31 @@ namespace SampleApp.Controllers
             return View();
         }
 
-        public ActionResult Test(int id)
+        public ActionResult TestNotFound(int id)
         {
             return new NotFoundViewResult();
         }
 
-        public ActionResult Fail()
+        public ActionResult FailThrowsExecption()
+        {
+            throw new Exception("An unanticipated exception occured in the code.");
+        }
+
+        public ActionResult TestInternalError()
+        {
+            return new InternalErrorViewResult(new Exception("Test of exception"), "Home", "TestInternalError");
+        }
+
+        public ActionResult FailError()
         {
             Response.Write("Attempt to write some content."); // Expecting the NotFoundViewResult to clear the response before sending its output.
 
-            throw new HttpException(404, "Not found!");
+            throw new HttpException(500, "Internal server error.");
+        }
+
+        public ActionResult TestAjaxNotFound()
+        {
+            return new NotFoundViewResult();
         }
     }
 }
