@@ -33,10 +33,5 @@ namespace SampleApp.Controllers
 
             throw new HttpException(500, "Internal server error.");
         }
-
-        public ActionResult TestAjaxNotFound()
-        {
-            return new NotFoundViewResult();
-        }
     }
 }

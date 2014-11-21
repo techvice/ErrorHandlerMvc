@@ -4,13 +4,6 @@
 @* ReSharper disable Mvc.ActionNotResolved *@
 @* Disabled because we want to generate not found routes! *@
 
-<script type="text/javascript">
-    
-    function ajaxCallCompleted(data) {
-        var x = data;
-    }
-
-</script>
 
 <h1>ErrorHandlerMvc Sample App</h1>
 <p>The sample application shows how ErrorHandlerMvc handles various 'not found' or exception scenarios.</p>
@@ -24,9 +17,6 @@
 <p>MVC views: <a href="@Url.Content("~/views")">/views</a>, <a href="@Url.Content("~/views/home/index.cshtml")">/views/home/index.cshtml</a>, <a href="@Url.Content("~/views/shared/_layout.cshtml")">/views/shared/_layout.cshtml</a></p>
 <p>Code-generated not found page: <a href="@Url.Action("product", new{id=1})">/home/product/1</a></p>
 <p>Action that throws exception: <a href="@Url.Action("FailThrowsExecption")">/Home/FailThrowsExecption</a></p>
-<p>Ajax call that returns json: @Ajax.ActionLink("Test ajax call", "TestAjaxNotFound", new AjaxOptions { HttpMethod = "POST", OnComplete = "ajaxCallCompleted"}) </p>
-<p id="jsonHolder">No ajax call yet.</p>
-
 
 <h2>Using ErrorHandlerMvc in your web app</h2>
 <p>The easiest way to add ErrorHandlerMvc is via nuget: <strong>Install-Package ErrorHandlerMvc</strong></p>

@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>ErrorHandlerMvc</id>
-        <version>1.1.1</version>
+        <version>1.1.2</version>
         <title>Error Handler MVC</title>
         <authors>Daniel Calkins</authors>
         <owners>Daniel Calkins</owners>
