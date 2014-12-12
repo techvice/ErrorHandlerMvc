@@ -66,7 +66,8 @@ namespace ErrorHandlerMvc
 
         private static void AddCatchAllRoute(RouteCollection routes)
         {
-            routes.MapRoute("NotFound-Catch-All", "{*any}", new {controller = "NotFound", action = "NotFound"});
+            if (routes["Not-Found-Catch-All"] == null)
+                routes.MapRoute("Not-Found-Catch-All", "{*any}", new { controller = "NotFound", action = "NotFound" });
         }
 
         public void Dispose()
