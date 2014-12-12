@@ -42,15 +42,12 @@ namespace ErrorHandlerMvc
 
         private static void AddErrorRoute(RouteCollection routes)
         {
-            // To allow IIS to execute "/notfound" when requesting something which is disallowed,
-            // such as /bin or /add_data.
             var route = new Route("error",
                 new RouteValueDictionary(new {controller = "InternalError", action = "Error",}),
-                new RouteValueDictionary(new {incoming = new IncomingRequestRouteConstraint()}),
-                new RouteValueDictionary(new {statusCode = 500}), new MvcRouteHandler());
+                new RouteValueDictionary(new {incoming = new IncomingRequestRouteConstraint()}), new MvcRouteHandler());
 
             // Insert at start of route table. 
-            //This means the application can still create another route like "{name}" that won't capture "/notfound".
+            //This means the application can still create another route like "{name}" that won't capture "/error".
             routes.Insert(0, route);
         }
 
