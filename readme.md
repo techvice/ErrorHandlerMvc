@@ -4,8 +4,6 @@ by [Daniel Calkins](http://dcalkins.com) - [Contact Email](mailto:dcalkins@outlo
 
 Forked from [NotFoundMvc](https://github.com/andrewdavey/NotFoundMvc) by Andrew Davey, David De Sloovere
 
-[![dcalkins MyGet Build Status](https://www.myget.org/BuildSource/Badge/dcalkins?identifier=017b9443-736d-4f29-b98c-27d23b05df60)](https://www.myget.org/)
-
 Provides a user-friendly error page whenever a controller, action or route is not found or encounters an error in your ASP.NET MVC5 application.
 A view called NotFound or Error is rendered instead of the default ASP.NET error page.
 
