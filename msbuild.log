@@ -1,0 +1,22 @@
+Build started 3/24/2015 11:56:00 AM.
+     1>Project "D:\GitHub\ErrorHandlerMvc\src\ErrorHandlerMvc.sln" on node 1 (default targets).
+     1>ValidateSolutionConfiguration:
+         Building solution configuration "Release|Any CPU".
+     1>Project "D:\GitHub\ErrorHandlerMvc\src\ErrorHandlerMvc.sln" (1) is building "D:\GitHub\ErrorHandlerMvc\src\ErrorHandlerMvc\ErrorHandlerMvc.csproj" (2) on node 1 (default targets).
+     2>GenerateTargetFrameworkMonikerAttribute:
+       Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+       CoreCompile:
+       Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+       CopyFilesToOutputDirectory:
+         ErrorHandlerMvc -> D:\GitHub\ErrorHandlerMvc\src\ErrorHandlerMvc\bin\Release\ErrorHandlerMvc.dll
+       PostBuildEvent:
+         copy /Y "D:\GitHub\ErrorHandlerMvc\src\ErrorHandlerMvc\bin\Release\ErrorHandlerMvc.dll" "D:\GitHub\ErrorHandlerMvc\src\\..\package\lib\net45\ErrorHandlerMvc.dll"
+                 1 file(s) copied.
+     2>Done Building Project "D:\GitHub\ErrorHandlerMvc\src\ErrorHandlerMvc\ErrorHandlerMvc.csproj" (default targets).
+     1>Done Building Project "D:\GitHub\ErrorHandlerMvc\src\ErrorHandlerMvc.sln" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.19

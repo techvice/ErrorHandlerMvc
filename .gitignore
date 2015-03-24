@@ -16,3 +16,6 @@ package/input/lib/net40/*
 !package/input/lib/net40/.gitignore
 package/output
 /src/packages
+NuGet.exe
+Build/ErrorHandlerMvc.1.1.4.nupkg
+*.nupkg
