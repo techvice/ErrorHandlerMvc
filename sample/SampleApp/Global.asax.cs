@@ -1,5 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Mvc.Routing;
 using System.Web.Routing;
+using SampleApp.Controllers;
 
 namespace SampleApp
 {
@@ -13,6 +20,7 @@ namespace SampleApp
         private static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+			routes.MapMvcAttributeRoutes();
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
@@ -20,9 +28,9 @@ namespace SampleApp
                 );
 
         }
-
         protected void Application_Start()
         {
+	        //PreApplicationStarter.Start();
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
